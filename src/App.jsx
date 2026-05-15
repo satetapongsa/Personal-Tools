@@ -34,15 +34,36 @@ import { formatCurrency, formatPercent } from './utils/formatter';
 function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [isDark, setIsDark] = useState(() => {
+    const saved = localStorage.getItem('pt-dash-theme');
+    return saved !== null ? JSON.parse(saved) : true;
+  });
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem('pt-dash-theme', JSON.stringify(isDark));
+    if (isDark) {
+      document.body.classList.add('dark');
+      document.body.style.backgroundColor = '#030712';
+    } else {
+      document.body.classList.remove('dark');
+      document.body.style.backgroundColor = '#f3f4f6';
+    }
+  }, [isDark]);
+
   return (
-    <div className="flex w-full h-screen p-6 gap-6">
-      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} currentTime={currentTime} />
+    <div className={`flex w-full h-screen p-6 gap-6 ${isDark ? 'dark' : 'light'}`}>
+      <Sidebar 
+        activeTab={activeTab} 
+        setActiveTab={setActiveTab} 
+        currentTime={currentTime} 
+        isDark={isDark}
+        setIsDark={setIsDark}
+      />
 
       <main className="flex-1 overflow-y-auto pr-2 custom-scroll">
         <header className="flex justify-between items-end mb-8">

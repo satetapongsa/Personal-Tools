@@ -34,7 +34,7 @@ function NavItem({ icon, label, active, onClick }) {
 /**
  * Sidebar Component
  */
-export default function Sidebar({ activeTab, setActiveTab, currentTime }) {
+export default function Sidebar({ activeTab, setActiveTab, currentTime, isDark, setIsDark }) {
   return (
     <aside className="w-72 glass-card flex flex-col p-6">
       <div className="flex items-center justify-between mb-10 px-2">
@@ -44,8 +44,11 @@ export default function Sidebar({ activeTab, setActiveTab, currentTime }) {
           </div>
           <h1 className="text-xl font-bold tracking-tight">PT Dash<span className="text-violet-500">.</span></h1>
         </div>
-        <button className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-dim hover:text-white transition-colors">
-          <Moon size={16} />
+        <button 
+          onClick={() => setIsDark(!isDark)}
+          className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-dim hover:text-white transition-colors"
+        >
+          {isDark ? <Moon size={16} /> : <Sun size={16} />}
         </button>
       </div>
 
