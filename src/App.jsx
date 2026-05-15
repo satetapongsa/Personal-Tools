@@ -24,6 +24,9 @@ import SubnetCalculator from './components/SubnetCalculator';
 // Constants
 import { ASSETS, SCHEDULE, STUDY_PROGRESS } from './constants/data';
 
+// Utils
+import { formatCurrency, formatPercent } from './utils/formatter';
+
 /**
  * Main Application Component
  */
@@ -98,9 +101,9 @@ function App() {
                         </div>
                         <span className="text-sm font-bold">{asset.name}</span>
                       </div>
-                      <div className="text-2xl font-bold mb-1 tracking-tight">${asset.price.toLocaleString()}</div>
+                      <div className="text-2xl font-bold mb-1 tracking-tight">{formatCurrency(asset.price)}</div>
                       <div className={`text-xs font-bold px-2 py-1 rounded-full inline-block ${asset.change >= 0 ? 'bg-emerald-500/10 text-emerald-400' : 'bg-rose-500/10 text-rose-400'}`}>
-                        {asset.change >= 0 ? '+' : ''}{asset.change}%
+                        {formatPercent(asset.change)}
                       </div>
                     </div>
                   ))}
