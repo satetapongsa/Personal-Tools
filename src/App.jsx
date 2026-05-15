@@ -33,6 +33,12 @@ const STUDY_PROGRESS = [
   { id: 3, subject: 'Python for Hacking', progress: 90, icon: <Terminal size={18} /> },
 ];
 
+/**
+ * Main Application Component
+ * 
+ * PT Dash - A high-performance personal dashboard for tracking assets, 
+ * study progress, and providing network utilities.
+ */
 function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -207,6 +213,15 @@ function App() {
   );
 }
 
+/**
+ * Navigation Item Component
+ * 
+ * @param {Object} props
+ * @param {React.ReactNode} props.icon - Lucide icon component
+ * @param {string} props.label - Display label
+ * @param {boolean} props.active - Active state
+ * @param {Function} props.onClick - Click handler
+ */
 function NavItem({ icon, label, active, onClick }) {
   return (
     <button 
@@ -225,12 +240,79 @@ function NavItem({ icon, label, active, onClick }) {
   );
 }
 
+/**
+ * SubnetCalculator Component
+ * 
+ * Provides a functional tool for network engineers to calculate IPv4 subnet details
+ * including Network Address, Subnet Mask, Broadcast, and Host Range.
+ */
 function SubnetCalculator() {
   const [ip, setIp] = useState('192.168.1.1');
   const [cidr, setCidr] = useState('24');
+  const [results, setResults] = useState({
+    network: '192.168.1.0',
+    mask: '255.255.255.0',
+    broadcast: '192.168.1.255',
+    range: '192.168.1.1 - 192.168.1.254',
+    hosts: '254'
+  });
+
+  useEffect(() => {
+    try {
+      calculateSubnet(ip, cidr);
+    } catch (e) {
+      // Keep previous results on invalid input
+    }
+  }, [ip, cidr]);
+
+  /**
+   * Performs IPv4 subnet calculations
+   * @param {string} ipAddr - The IP address string
+   * @param {number|string} prefix - The CIDR prefix
+   */
+  const calculateSubnet = (ipAddr, prefix) => {
+    const p = parseInt(prefix);
+    if (isNaN(p) || p < 0 || p > 32) return;
+
+    const ipParts = ipAddr.split('.').map(Number);
+    if (ipParts.length !== 4 || ipParts.some(x => isNaN(x) || x < 0 || x > 255)) return;
+
+    // Calculate Mask
+    const maskBinary = ('1'.repeat(p) + '0'.repeat(32 - p));
+    const maskParts = [];
+    for (let i = 0; i < 4; i++) {
+      maskParts.push(parseInt(maskBinary.substr(i * 8, 8), 2));
+    }
+    const maskStr = maskParts.join('.');
+
+    // Calculate Network
+    const netParts = ipParts.map((part, i) => part & maskParts[i]);
+    const netStr = netParts.join('.');
+
+    // Calculate Broadcast
+    const wildParts = maskParts.map(part => 255 - part);
+    const bcParts = netParts.map((part, i) => part | wildParts[i]);
+    const bcStr = bcParts.join('.');
+
+    // Host Range
+    const firstHost = [...netParts];
+    firstHost[3] += 1;
+    const lastHost = [...bcParts];
+    lastHost[3] -= 1;
+
+    const totalHosts = p >= 31 ? 0 : Math.pow(2, 32 - p) - 2;
+
+    setResults({
+      network: netStr,
+      mask: maskStr,
+      broadcast: bcStr,
+      range: p >= 31 ? 'N/A' : `${firstHost.join('.')} - ${lastHost.join('.')}`,
+      hosts: totalHosts.toLocaleString()
+    });
+  };
   
   return (
-    <div className="glass-card p-8 max-w-2xl">
+    <div className="glass-card p-8 max-w-2xl animate-fade-in">
       <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
         <Globe className="text-blue-400" /> IPv4 Subnet Calculator
       </h3>
@@ -242,7 +324,8 @@ function SubnetCalculator() {
             type="text" 
             value={ip} 
             onChange={(e) => setIp(e.target.value)}
-            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors"
+            placeholder="e.g. 192.168.1.1"
+            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors font-mono"
           />
         </div>
         <div>
@@ -250,23 +333,32 @@ function SubnetCalculator() {
           <input 
             type="number" 
             value={cidr} 
+            min="0"
+            max="32"
             onChange={(e) => setCidr(e.target.value)}
-            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors"
+            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors font-mono"
           />
         </div>
       </div>
 
       <div className="space-y-4">
-        <ResultRow label="Network Address" value={`${ip.split('.').slice(0,3).join('.')}.0`} />
-        <ResultRow label="Subnet Mask" value="255.255.255.0" />
-        <ResultRow label="Broadcast Address" value={`${ip.split('.').slice(0,3).join('.')}.255`} />
-        <ResultRow label="Host Range" value={`${ip.split('.').slice(0,3).join('.')}.1 - .254`} />
-        <ResultRow label="Total Hosts" value="254" />
+        <ResultRow label="Network Address" value={results.network} />
+        <ResultRow label="Subnet Mask" value={results.mask} />
+        <ResultRow label="Broadcast Address" value={results.broadcast} />
+        <ResultRow label="Host Range" value={results.range} />
+        <ResultRow label="Total Assignable Hosts" value={results.hosts} />
       </div>
     </div>
   );
 }
 
+/**
+ * Result Row Component for Tools
+ * 
+ * @param {Object} props
+ * @param {string} props.label - Result label
+ * @param {string} props.value - Result value
+ */
 function ResultRow({ label, value }) {
   return (
     <div className="flex justify-between items-center p-3 rounded-lg bg-white/5 border border-white/5">

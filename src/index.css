@@ -1,6 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
 
+/**
+ * PT Dash - Global Design System
+ * 
+ * Implements a modern, professional dark-mode UI with glassmorphism 
+ * and dynamic visual effects.
+ */
+
 :root {
+  /* Core Color Palette */
   --primary: #8b5cf6;
   --primary-glow: rgba(139, 92, 246, 0.5);
   --secondary: #ec4899;
@@ -12,6 +20,7 @@
   --accent: #10b981;
 }
 
+/* Base Styles & Resets */
 * {
   margin: 0;
   padding: 0;
