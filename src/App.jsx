@@ -79,13 +79,18 @@ function App() {
                 </div>
                 <div className="grid grid-cols-3 gap-4">
                   {ASSETS.map(asset => (
-                    <div key={asset.id} className="p-4 rounded-2xl bg-white/5 border border-white/5">
-                      <div className="flex items-center gap-2 mb-3">
-                        <div className="w-2 h-2 rounded-full" style={{ backgroundColor: asset.color }}></div>
-                        <span className="text-xs font-bold text-dim">{asset.symbol}</span>
+                    <div key={asset.id} className="p-5 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all cursor-pointer group relative overflow-hidden">
+                      <div className="absolute top-0 right-0 p-2 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <TrendingUp size={48} />
                       </div>
-                      <div className="text-xl font-bold mb-1">${asset.price.toLocaleString()}</div>
-                      <div className={`text-xs font-medium ${asset.change >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-xs" style={{ backgroundColor: asset.color }}>
+                          {asset.symbol[0]}
+                        </div>
+                        <span className="text-sm font-bold">{asset.name}</span>
+                      </div>
+                      <div className="text-2xl font-bold mb-1 tracking-tight">${asset.price.toLocaleString()}</div>
+                      <div className={`text-xs font-bold px-2 py-1 rounded-full inline-block ${asset.change >= 0 ? 'bg-emerald-500/10 text-emerald-400' : 'bg-rose-500/10 text-rose-400'}`}>
                         {asset.change >= 0 ? '+' : ''}{asset.change}%
                       </div>
                     </div>
