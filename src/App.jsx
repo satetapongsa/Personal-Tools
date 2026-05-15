@@ -5,7 +5,8 @@ import {
   Clock, 
   ChevronRight,
   Plus,
-  Cpu
+  Cpu,
+  Search
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -55,6 +56,14 @@ function App() {
             <p className="text-dim">Here's what's happening with your projects today.</p>
           </div>
           <div className="flex gap-3">
+            <div className="relative group">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-dim group-focus-within:text-violet-400 transition-colors" size={16} />
+              <input 
+                type="text" 
+                placeholder="Search tools..." 
+                className="bg-white/5 border border-white/10 rounded-xl pl-10 pr-4 py-2 text-sm focus:outline-none focus:border-violet-500/50 w-64 transition-all"
+              />
+            </div>
             <button className="glass-card px-4 py-2 flex items-center gap-2 hover:bg-white/10 text-sm font-medium">
               <Plus size={16} /> New Entry
             </button>
