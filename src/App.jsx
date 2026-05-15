@@ -7,7 +7,8 @@ import {
   Plus,
   Cpu,
   Search,
-  Bell
+  Bell,
+  ShieldCheck
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -37,7 +38,12 @@ function App() {
       <main className="flex-1 overflow-y-auto pr-2 custom-scroll">
         <header className="flex justify-between items-end mb-8">
           <div>
-            <h2 className="text-3xl font-extrabold mb-1">Welcome back, Admin</h2>
+            <div className="flex items-center gap-3 mb-1">
+              <h2 className="text-3xl font-extrabold">Welcome back, Admin</h2>
+              <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-bold uppercase tracking-wider">
+                <ShieldCheck size={12} /> Security Level: High
+              </div>
+            </div>
             <p className="text-dim">Here's what's happening with your projects today.</p>
           </div>
           <div className="flex gap-3">
