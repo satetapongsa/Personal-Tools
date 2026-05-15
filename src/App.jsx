@@ -127,26 +127,36 @@ function App() {
               </div>
 
               <div className="col-span-12 glass-card p-6">
-                <h3 className="text-lg font-semibold mb-6 flex items-center gap-2">
+                <h3 className="text-lg font-semibold mb-8 flex items-center gap-2">
                   <Cpu className="text-emerald-400" size={20} /> Learning Roadmap
                 </h3>
                 <div className="grid grid-cols-3 gap-8">
                   {STUDY_PROGRESS.map(item => (
-                    <div key={item.id}>
-                      <div className="flex justify-between items-center mb-2">
-                        <div className="flex items-center gap-2 text-sm font-medium">
-                          {item.icon} {item.subject}
+                    <div key={item.id} className="flex flex-col items-center p-4 rounded-3xl bg-white/5 border border-white/5 group hover:bg-white/10 transition-all">
+                      <div className="relative w-24 h-24 mb-4">
+                        <svg className="w-full h-full" viewBox="0 0 100 100">
+                          <circle 
+                            className="text-white/10 stroke-current" 
+                            strokeWidth="8" 
+                            cx="50" cy="50" r="40" fill="transparent"
+                          ></circle>
+                          <motion.circle 
+                            className="text-emerald-500 stroke-current" 
+                            strokeWidth="8" 
+                            strokeLinecap="round" 
+                            cx="50" cy="50" r="40" fill="transparent"
+                            strokeDasharray="251.2"
+                            initial={{ strokeDashoffset: 251.2 }}
+                            animate={{ strokeDashoffset: 251.2 - (251.2 * item.progress) / 100 }}
+                            transition={{ duration: 1.5, ease: "easeOut" }}
+                          ></motion.circle>
+                        </svg>
+                        <div className="absolute inset-0 flex items-center justify-center font-bold text-lg">
+                          {item.progress}%
                         </div>
-                        <span className="text-xs font-bold text-emerald-400">{item.progress}%</span>
                       </div>
-                      <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden">
-                        <motion.div 
-                          initial={{ width: 0 }}
-                          animate={{ width: `${item.progress}%` }}
-                          transition={{ duration: 1, delay: 0.5 }}
-                          className="h-full bg-gradient-to-r from-emerald-500 to-teal-400"
-                        />
-                      </div>
+                      <div className="text-sm font-semibold text-center mb-1">{item.subject}</div>
+                      <div className="text-[10px] uppercase tracking-widest text-dim font-bold">In Progress</div>
                     </div>
                   ))}
                 </div>
