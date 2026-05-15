@@ -5,7 +5,8 @@ import {
   BookOpen, 
   Terminal, 
   Clock, 
-  Lock
+  Lock,
+  Moon
 } from 'lucide-react';
 
 /**
@@ -35,11 +36,16 @@ function NavItem({ icon, label, active, onClick }) {
 export default function Sidebar({ activeTab, setActiveTab, currentTime }) {
   return (
     <aside className="w-72 glass-card flex flex-col p-6">
-      <div className="flex items-center gap-3 mb-10 px-2">
-        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center shadow-lg">
-          <Lock className="text-white" size={24} />
+      <div className="flex items-center justify-between mb-10 px-2">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center shadow-lg">
+            <Lock className="text-white" size={24} />
+          </div>
+          <h1 className="text-xl font-bold tracking-tight">PT Dash<span className="text-violet-500">.</span></h1>
         </div>
-        <h1 className="text-xl font-bold tracking-tight">PT Dash<span className="text-violet-500">.</span></h1>
+        <button className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-dim hover:text-white transition-colors">
+          <Moon size={16} />
+        </button>
       </div>
 
       <nav className="flex flex-col gap-2">
