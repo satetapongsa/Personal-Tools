@@ -20,6 +20,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 // Components
 import Sidebar from './components/Sidebar';
 import SubnetCalculator from './components/SubnetCalculator';
+import SecurityLogs from './components/SecurityLogs';
 
 // Constants
 import { ASSETS, SCHEDULE, STUDY_PROGRESS } from './constants/data';
@@ -151,6 +152,10 @@ function App() {
                     </div>
                   ))}
                 </div>
+              </div>
+
+              <div className="col-span-4">
+                <SecurityLogs />
               </div>
 
               <div className="col-span-12 glass-card p-6">
