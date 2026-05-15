@@ -7,7 +7,8 @@ import {
   Clock, 
   Lock,
   Moon,
-  User
+  User,
+  Sun
 } from 'lucide-react';
 
 /**
@@ -108,6 +109,7 @@ export default function Sidebar({ activeTab, setActiveTab, currentTime, isDark, 
           </div>
         </div>
       </div>
+    </div>
     </aside>
   );
 }
