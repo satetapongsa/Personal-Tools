@@ -21,6 +21,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Sidebar from './components/Sidebar';
 import SubnetCalculator from './components/SubnetCalculator';
 import SecurityLogs from './components/SecurityLogs';
+import PasswordGenerator from './components/PasswordGenerator';
+import CryptoNews from './components/CryptoNews';
 
 // Constants
 import { ASSETS, SCHEDULE, STUDY_PROGRESS } from './constants/data';
@@ -215,6 +217,10 @@ function App() {
                 </div>
               </div>
 
+              <div className="col-span-4">
+                <CryptoNews />
+              </div>
+
               <div className="col-span-12 grid grid-cols-4 gap-4">
                 <QuickAction icon={<Zap size={18} />} label="Run Scan" color="bg-amber-500/10 text-amber-500" />
                 <QuickAction icon={<RefreshCw size={18} />} label="Sync Assets" color="bg-blue-500/10 text-blue-500" />
@@ -230,8 +236,10 @@ function App() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
+              className="grid grid-cols-2 gap-6"
             >
               <SubnetCalculator />
+              <PasswordGenerator />
             </motion.div>
           )}
           
