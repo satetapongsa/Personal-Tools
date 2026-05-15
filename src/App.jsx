@@ -10,7 +10,10 @@ import {
   Bell,
   ShieldCheck,
   Cloud,
-  Sun
+  Sun,
+  Zap,
+  Settings,
+  RefreshCw
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -182,6 +185,13 @@ function App() {
                   ))}
                 </div>
               </div>
+
+              <div className="col-span-12 grid grid-cols-4 gap-4">
+                <QuickAction icon={<Zap size={18} />} label="Run Scan" color="bg-amber-500/10 text-amber-500" />
+                <QuickAction icon={<RefreshCw size={18} />} label="Sync Assets" color="bg-blue-500/10 text-blue-500" />
+                <QuickAction icon={<Terminal size={18} />} label="Open Shell" color="bg-emerald-500/10 text-emerald-500" />
+                <QuickAction icon={<Settings size={18} />} label="Preferences" color="bg-violet-500/10 text-violet-500" />
+              </div>
             </motion.div>
           )}
 
@@ -205,6 +215,15 @@ function App() {
         </AnimatePresence>
       </main>
     </div>
+  );
+}
+
+function QuickAction({ icon, label, color }) {
+  return (
+    <button className={`glass-card p-4 flex items-center justify-center gap-3 hover:scale-[1.02] transition-transform ${color}`}>
+      {icon}
+      <span className="text-sm font-bold uppercase tracking-wider">{label}</span>
+    </button>
   );
 }
 
