@@ -56,6 +56,15 @@
 
 ---
 
+## 🗺️ Roadmap (แผนการพัฒนา)
+
+- [ ] เชื่อมต่อ Real-time API สำหรับราคา Crypto
+- [ ] ระบบบันทึก Log การทำแล็บ Cybersecurity
+- [ ] ระบบแจ้งเตือนผ่าน Line/Discord เมื่อถึงเวลาสอบ
+- [ ] เพิ่มเครื่องมือ Hash Generator และ Base64 Encoder/Decoder
+
+---
+
 ## 📝 Commit Standard
 
 โปรเจกต์นี้ใช้ระบบ **Conventional Commits** เพื่อความเป็นมืออาชีพ:
