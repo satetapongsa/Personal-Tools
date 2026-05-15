@@ -6,7 +6,8 @@ import {
   ChevronRight,
   Plus,
   Cpu,
-  Search
+  Search,
+  Bell
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -56,6 +57,10 @@ function App() {
             <p className="text-dim">Here's what's happening with your projects today.</p>
           </div>
           <div className="flex gap-3">
+            <button className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-dim hover:text-white transition-colors relative">
+              <Bell size={18} />
+              <div className="absolute top-2 right-2 w-2 h-2 bg-rose-500 rounded-full border-2 border-[#030712]" />
+            </button>
             <div className="relative group">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-dim group-focus-within:text-violet-400 transition-colors" size={16} />
               <input 
