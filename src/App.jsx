@@ -8,7 +8,9 @@ import {
   Cpu,
   Search,
   Bell,
-  ShieldCheck
+  ShieldCheck,
+  Cloud,
+  Sun
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -99,6 +101,30 @@ function App() {
                       </div>
                     </div>
                   ))}
+                </div>
+              </div>
+
+              <div className="col-span-4 glass-card p-6 flex flex-col justify-between">
+                <div>
+                  <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                    <Sun className="text-amber-400" size={20} /> Live Status
+                  </h3>
+                  <div className="flex items-center justify-between mb-4">
+                    <div>
+                      <div className="text-3xl font-bold">32°C</div>
+                      <div className="text-xs text-dim">Bangkok, TH • Sunny</div>
+                    </div>
+                    <Cloud className="text-dim opacity-50" size={40} />
+                  </div>
+                </div>
+                <div className="pt-4 border-t border-white/5 space-y-2">
+                  <div className="flex justify-between text-xs">
+                    <span className="text-dim">Network Load</span>
+                    <span className="font-bold text-violet-400">Low (12%)</span>
+                  </div>
+                  <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                    <div className="h-full bg-violet-500 w-[12%]" />
+                  </div>
                 </div>
               </div>
 
