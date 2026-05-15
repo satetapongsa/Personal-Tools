@@ -6,7 +6,8 @@ import {
   Terminal, 
   Clock, 
   Lock,
-  Moon
+  Moon,
+  User
 } from 'lucide-react';
 
 /**
@@ -75,7 +76,18 @@ export default function Sidebar({ activeTab, setActiveTab, currentTime }) {
         />
       </nav>
 
-      <div className="mt-auto space-y-4">
+      <div className="mt-auto space-y-6">
+        <div className="flex items-center gap-3 px-2 py-4 border-t border-white/5">
+          <div className="w-10 h-10 rounded-full bg-violet-500/20 flex items-center justify-center text-violet-400">
+            <User size={20} />
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="text-sm font-bold truncate text-white">Admin User</div>
+            <div className="text-[10px] text-dim truncate">Premium Access</div>
+          </div>
+        </div>
+
+        <div className="space-y-4">
         <div className="glass-card p-4 bg-emerald-500/5 border-emerald-500/10">
           <div className="flex items-center gap-2 mb-2">
             <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
