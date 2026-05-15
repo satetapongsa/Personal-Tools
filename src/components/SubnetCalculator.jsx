@@ -1,14 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { Globe } from 'lucide-react';
+import { Globe, Copy, Check } from 'lucide-react';
 
 /**
  * Result Row Component for Tools
  */
 function ResultRow({ label, value }) {
+  const [copied, setCopied] = React.useState(false);
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(value);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
-    <div className="flex justify-between items-center p-3 rounded-lg bg-white/5 border border-white/5">
+    <div 
+      className="flex justify-between items-center p-3 rounded-lg bg-white/5 border border-white/5 hover:bg-white/10 transition-colors cursor-pointer group"
+      onClick={copyToClipboard}
+    >
       <span className="text-sm text-dim">{label}</span>
-      <span className="text-sm font-mono font-bold text-blue-400">{value}</span>
+      <div className="flex items-center gap-2">
+        <span className="text-sm font-mono font-bold text-blue-400">{value}</span>
+        {copied ? (
+          <Check size={14} className="text-emerald-400" />
+        ) : (
+          <Copy size={14} className="text-dim opacity-0 group-hover:opacity-100 transition-opacity" />
+        )}
+      </div>
     </div>
   );
 }
