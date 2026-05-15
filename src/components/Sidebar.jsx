@@ -92,24 +92,24 @@ export default function Sidebar({ activeTab, setActiveTab, currentTime, isDark, 
         </div>
 
         <div className="space-y-4">
-        <div className="glass-card p-4 bg-emerald-500/5 border-emerald-500/10">
-          <div className="flex items-center gap-2 mb-2">
-            <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-500">System Secure</span>
+          <div className="glass-card p-4 bg-emerald-500/5 border-emerald-500/10">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-500">System Secure</span>
+            </div>
+            <div className="text-[11px] text-dim leading-relaxed">
+              All protocols active. VPN connected to Node-04.
+            </div>
           </div>
-          <div className="text-[11px] text-dim leading-relaxed">
-            All protocols active. VPN connected to Node-04.
-          </div>
-        </div>
 
-        <div className="glass-card p-4 bg-white/5">
-          <div className="text-xs text-dim mb-1">Current System Time</div>
-          <div className="text-lg font-mono font-bold tracking-wider">
-            {currentTime.toLocaleTimeString([], { hour12: false })}
+          <div className="glass-card p-4 bg-white/5">
+            <div className="text-xs text-dim mb-1">Current System Time</div>
+            <div className="text-lg font-mono font-bold tracking-wider">
+              {currentTime.toLocaleTimeString([], { hour12: false })}
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </aside>
   );
 }

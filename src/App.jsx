@@ -25,7 +25,7 @@ import PasswordGenerator from './components/PasswordGenerator';
 import CryptoNews from './components/CryptoNews';
 
 // Constants
-import { ASSETS, SCHEDULE, STUDY_PROGRESS } from './constants/data';
+import { ASSETS, SCHEDULE, STUDY_PROGRESS } from './constants/data.jsx';
 
 // Utils
 import { formatCurrency, formatPercent } from './utils/formatter';
